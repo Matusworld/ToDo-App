@@ -18,3 +18,7 @@ class RegisterForm(FlaskForm):
 class TodoListForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()], render_kw={"placeholder": "Enter Title"})
     submit = SubmitField('Create')
+
+class TaskForm(FlaskForm):
+    description = StringField('Description', validators=[DataRequired()], render_kw={"placeholder": "Enter Description"})
+    submit = SubmitField('Create')

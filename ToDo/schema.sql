@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS todo_list(
 	title VARCHAR(255) NOT NULL,
 	creation_date DATE NOT NULL,
 	user_id INTEGER NOT NULL,
-	FOREIGN KEY (user_id) REFERENCES Users(id)
+	FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS tasks(
@@ -22,5 +22,5 @@ CREATE TABLE IF NOT EXISTS tasks(
 	description VARCHAR(255) NOT NULL,
 	completed BOOLEAN default false,
 	todo_list_id INTEGER NOT NULL,
-	FOREIGN KEY (todo_list_id) REFERENCES todo_list(id)
+	FOREIGN KEY (todo_list_id) REFERENCES todo_list(id) ON DELETE CASCADE
 );
