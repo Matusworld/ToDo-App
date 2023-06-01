@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}ToDo Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="mt-3">Welcome to ToDo</h1>
+    <p class="lead">This is a simple ToDo application built with Flask.</p>
+</div>
+<h1 align="center"> Todo List </h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title(class="form-control form-control-lg")}}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+</form>
+<ul class="list-group list-group-flush" id="todoList">
+    {% for todo in todo_list %}
+    <li class="list-group-item">
+        <strong>Title:</strong> {{ todo[1] }}<br>
+        <strong>Created At:</strong> {{ todo[2] }}
+        
+        <!-- View Button -->
+        <button type="button" class="btn btn-primary">
+            View
+        </button>
+
+        <!-- Delete Button -->
+        <button type="button" class="btn btn-danger">
+            Delete
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
