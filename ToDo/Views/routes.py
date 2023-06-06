@@ -12,9 +12,6 @@ def home():
     user = User(current_user)
 
     todo_lists = todo_lists_task_count(user)
-    
-    
-    print(todo_lists)
 
     form = TodoListForm()
 
