@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h1 align="center"> Todo List </h1>
+<h1 align="center"> Your Todo Lists </h1>
 <form method="POST">
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -18,7 +18,8 @@
     <li class="list-group-item d-flex justify-content-between align-items-center">
       <div>
         <strong>Title:</strong> {{ todo[1] }}<br>
-        <strong>Created At:</strong> {{ todo[2] }}
+        <strong>Created At:</strong> {{ todo[2] }} <br>
+        {{ todo[5]}} / {{ todo[4] }} tasks completed 
       </div>
   
       <div class="d-flex">
