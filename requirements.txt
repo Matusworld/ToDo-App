@@ -1,0 +1,5 @@
+psycopg2
+flask
+flask_login
+flask_wtf
+email_validator
