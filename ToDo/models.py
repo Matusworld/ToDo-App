@@ -130,6 +130,22 @@ def delete_task(task_id):
     conn.commit()
     cur.close()
 
+def todo_lists_task_count(user):
+    cur = conn.cursor()
+
+    todo_list_sql = """
+       SELECT *,
+       (SELECT COUNT(*) FROM tasks WHERE tasks.todo_list_id = todo_list.id) AS task_count,
+       (SELECT COUNT(*) FROM tasks WHERE tasks.todo_list_id = todo_list.id AND tasks.completed) AS task_count_completed
+        FROM todo_list
+        WHERE todo_list.user_id = %s
+        
+    """
+
+    cur.execute(todo_list_sql, (user.userId,))
+    todo_lists = cur.fetchall()
+    cur.close()
+    return todo_lists
 
 def select_todo_lists(user):
     cur = conn.cursor()
@@ -147,7 +163,7 @@ def select_tasks(todo_list_id):
     cur = conn.cursor()
 
     todo_list_sql = """
-        SELECT * FROM tasks WHERE todo_list_id = %s
+        SELECT * FROM tasks WHERE todo_list_id = %s ORDER BY taskid
     """
 
     cur.execute(todo_list_sql, (todo_list_id,))

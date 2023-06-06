@@ -1,7 +1,7 @@
 from flask import blueprints, render_template, flash, redirect, url_for
 from flask_login import login_required, current_user
 
-from ToDo.models import User, Task, select_todo_lists, insert_todo_list, select_tasks, get_todo_list, insert_task, delete_todo_list, delete_task, get_task, update_task
+from ToDo.models import User, Task, select_todo_lists, insert_todo_list, select_tasks, get_todo_list, insert_task, delete_todo_list, delete_task, get_task, update_task, todo_lists_task_count
 from ToDo.forms import TodoListForm, TaskForm
 
 Views = blueprints.Blueprint('Views', __name__)
@@ -10,7 +10,11 @@ Views = blueprints.Blueprint('Views', __name__)
 @login_required
 def home():
     user = User(current_user)
-    todo_list = select_todo_lists(user)
+
+    todo_lists = todo_lists_task_count(user)
+    
+    
+    print(todo_lists)
 
     form = TodoListForm()
 
@@ -19,7 +23,7 @@ def home():
         flash("Todo List created successfully!", category='success')
         return redirect(url_for('Views.home'))
 
-    return render_template('home.html', form=form, user=current_user, todo_list=todo_list)
+    return render_template('home.html', form=form, user=current_user, todo_list=todo_lists)
 
 @Views.route('/<int:todo_list_id>', methods=['GET', 'POST'])
 @login_required
