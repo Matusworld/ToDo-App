@@ -18,7 +18,7 @@
     {% for task in tasks %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <strong>Description:</strong> {{ task[1] }}
+            <strong>Description:&nbsp;</strong> {{ task[1] }}<br>
             <form action="{{ url_for('Views.task_update', task_id=task[0]) }}" method="POST">
                 <input type="hidden" name="completed" value="{{ task[2] }}">
                 <label class="checkbox-container">

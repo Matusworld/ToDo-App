@@ -11,7 +11,6 @@ Views = blueprints.Blueprint('Views', __name__)
 def home():
     user = User(current_user)
     todo_list = select_todo_lists(user)
-    print(todo_list)
 
     form = TodoListForm()
 
@@ -39,14 +38,11 @@ def task_delete(task_id):
     
     delete_task(task_id)
 
-    # Make check if there are tasks present
     return redirect(url_for('Views.tasks', todo_list_id=todo_list_id))
 
 @Views.route('/todo_list/update/<int:task_id>', methods=['GET', 'POST'])
 @login_required
 def task_update(task_id):
-
-    print("task update")
 
     task  = get_task(task_id)
 
@@ -54,7 +50,6 @@ def task_update(task_id):
 
     todo_list_id = get_task(task_id).todo_list_id
     
-    # Make check if there are tasks present
     return redirect(url_for('Views.tasks', todo_list_id=todo_list_id))
 
 @Views.route('/todo_list/<int:todo_list_id>', methods=['GET', 'POST'])
@@ -66,8 +61,6 @@ def tasks(todo_list_id):
     todo_list = get_todo_list(todo_list_id)
 
     form = TaskForm()
-
-    print(tasks)
 
     if form.validate_on_submit():
         insert_task(form.description.data, todo_list_id)
