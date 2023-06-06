@@ -171,6 +171,23 @@ def select_tasks(todo_list_id):
     cur.close()
     return tasks
 
+def select_all_tasks_by_userId(user_id):
+    cur = conn.cursor()
+
+    all_tasks_sql = """
+        SELECT tasks.taskId, tasks.description, tasks.completed, todo_list.title
+        FROM Users
+        JOIN todo_list ON Users.id = todo_list.user_id
+        JOIN tasks ON todo_list.id = tasks.todo_list_id
+        WHERE Users.id = %s 
+        ORDER BY taskId;
+    """
+
+    cur.execute(all_tasks_sql, (user_id,))
+    all_tasks = cur.fetchall()
+    cur.close()
+    return all_tasks
+
 def get_todo_list(todo_list_id):
     cur = conn.cursor()
 

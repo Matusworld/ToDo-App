@@ -1,28 +1,22 @@
 {% extends "layout.html" %}
-{% block title %}Tasks For  {{ todo_list.title }} {% endblock %}
+{% block title %} All Tasks {% endblock %}
 
 {% block content %}
 
-<h1 align="center"> Tasks for Todo List: {{ todo_list.title }}</h1>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-        {{ form.description(class="form-control form-control-lg")}}
-    </div>
-    <div class="form-group">
-        {{ form.submit(class="btn btn-outline-info") }}
-    </div>
-</form>
+<h1 align="center"> All Tasks </h1>
 
 <ul class="list-group list-group-flush" id="tasks" style="display: flex; flex-direction: column;">
     {% for task in tasks %}
-    <li class="list-group-item d-flex justify-content-between align-items-center" style="display: flex; align-items: center;">
-        <div class="d-flex align-items-center">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="d-flex align-items-center"> <!-- Added align-items: center; -->
             <form action="{{ url_for('Views.task_update', task_id=task[0]) }}" method="POST" style="display: flex; align-items: center;"> <!-- Added styles here -->
                 <input type="hidden" name="completed" value="{{ task[2] }}">
                 <input type="checkbox" name="status" {% if task[2] %}checked{% endif %} onchange="this.form.submit()" style="zoom: 1.5;">
             </form>
-            <strong style="margin-left: 10px;">Description:&nbsp;</strong> {{ task[1] }}
+            <div style="display: flex; flex-direction: column; margin-left: 10px;">
+                <div><strong>Description:</strong> {{ task[1] }}</div>
+                <div><strong>Todo List:</strong> {{ task[3] }}</div>
+            </div>
         </div>
       
         <div class="d-flex">

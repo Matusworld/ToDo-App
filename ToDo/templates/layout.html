@@ -19,6 +19,8 @@
                 {% if user.is_authenticated %}
                 <!-- Home -->
                 <a class="nav-item nav-link" href="{{ url_for('Views.home') }}">Home</a>
+                <!-- All Tasks -->
+                <a class="nav-item nav-link" href ="{{ url_for('Views.all_tasks') }}">All Tasks</a>
                 <!-- Logout -->
                 <a class="nav-item nav-link ml-auto" href="{{ url_for('Login.logout') }}">Logout</a>
                 <!-- Logged in as username -->
